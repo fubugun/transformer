@@ -1,21 +1,18 @@
 # Mini Transformer
 
-本项目从零实现了一个 **最小版本的 Transformer 模型**，用于理解 Transformer 的核心机制，并逐步复现 GPT 类模型的基本功能。
-
 ## 项目简介
 
-`Mini_transformer.py` 构建了一个基于 **Transformer** 架构的神经网络，包括：
+### `13_mini_transformer.py`
 
-* **Embedding 层**：将 token 映射为向量表示
-* **Self-Attention 机制**：建模序列中不同 token 之间的依赖关系
-* **Feed Forward Network (前馈网络)**：对特征进行非线性变换
-* **多层 Transformer Block 堆叠**：提升模型表达能力
+用 PyTorch 实现的**精简版 Encoder–Decoder Transformer**：含 sin/cos 位置编码、多头注意力、前馈、堆叠的 Encoder/Decoder 层，以及共享词嵌入和输出线性层；`make_mask` 里用 `src != 0` 做 padding 掩码、下三角做 decoder 因果掩码。
+文件末尾用**随机整数**当 `src`/`tgt` 做一次前向，再 `argmax` 打印预测 id，用来**验证前向与 shape**。
 
-模型的训练目标是：
+---
 
-> 根据已有的 token 序列，预测每个位置的下一个 token 的概率分布（自回归语言模型）
+### `14_mini_t_generate.py`
 
-该过程是 GPT 类模型生成文本能力的核心原理。
+在**同一套 Transformer 结构**上，专门为**自回归生成**做了两件事：一是 **`MultiHeadAttention` 支持 `T_q ≠ T_k`**（交叉注意力与不等长 decoder 兼容）；二是提供 **`generate_sentence`**：从单 token 起步，循环调用 `model(src, tgt)`，用**最后一个位置**的 logits 做 `argmax` 再拼到 `tgt` 上。测试段演示随机 `src` 上的生成。权重仍是随机的，输出 id **没有语义**
+
 
 论文来源：
 
