@@ -3,19 +3,23 @@
 
 # 项目结构
 
-13_mini_transformer.py  
+`13_mini_transformer.py`
 基础 Transformer 结构实现（仅验证前向传播）
 
-14_mini_t_generate.py  
+  
+`14_mini_t_generate.py`
 基于 Transformer 的自回归生成示例
 
-17_real_translate_1.py
+
+`17_real_translate_1.pyy`
 在 Colab 上训练的翻译模型（基础版）
 
-18_real_translate_2.py 
+
+`18_real_translate_2.py `
 在 Colab 上训练的翻译模型（改进版）
 
-transformer_translation_1.pth
+
+`transformer_translation_1.pth`
 训练好的模型参数
 
 ---
